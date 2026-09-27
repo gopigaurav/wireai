@@ -1,0 +1,53 @@
+{
+  "name": "voxprime-chat",
+  "displayName": "VoxPrime Chat",
+  "description": "Sidebar chat for your local VoxPrime agent (Ollama + tools)",
+  "version": "0.1.0",
+  "publisher": "voxprime",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": ["Other"],
+  "activationEvents": ["onView:voxprime.chatView"],
+  "main": "./extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "voxprime",
+          "title": "VoxPrime",
+          "icon": "media/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "voxprime": [
+        {
+          "type": "webview",
+          "id": "voxprime.chatView",
+          "name": "Chat"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "voxprime.focusChat",
+        "title": "VoxPrime: Focus Chat"
+      },
+      {
+        "command": "voxprime.insertSelection",
+        "title": "VoxPrime: Ask About Selection"
+      }
+    ],
+    "configuration": {
+      "title": "VoxPrime",
+      "properties": {
+        "voxprime.serverUrl": {
+          "type": "string",
+          "default": "http://127.0.0.1:8765",
+          "description": "Base URL of python -m voxprime.web.chat_server"
+        }
+      }
+    }
+  }
+}

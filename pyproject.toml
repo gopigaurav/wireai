@@ -1,0 +1,60 @@
+[project]
+name = "voxprime"
+version = "0.1.0"
+description = "FRIDAY-inspired AI agent with Qwen 3.5, LangGraph, and CrewAI"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    # MCP Server + client (git integration)
+    "fastmcp>=0.1.0",
+    "mcp>=1.0.0",
+    "httpx>=0.27.0",
+
+    # LLM - Ollama for local Qwen 3.5
+    "ollama>=0.3.0",
+
+    # Workflow & Agent Orchestration
+    "langgraph>=0.2.0",
+    "langchain>=0.3.0",
+    "langchain-ollama>=0.2.0",
+    "crewai>=0.70.0",
+
+    # Utilities
+    "python-dotenv>=1.0.0",
+    "pydantic>=2.0.0",
+
+    # Documents & web (attachments)
+    "pypdf>=5.0.0",
+    "python-docx>=1.1.0",
+    "beautifulsoup4>=4.12.0",
+    "html2text>=2024.2.26",
+
+    # Code Review
+    "code-review-graph>=0.1.0",
+    "nest-asyncio>=1.6.0",
+
+    # Voice Pipeline (optional - requires C++ build tools on Windows)
+    # Install separately if needed: pip install pipecat-ai faster-whisper kokoro
+    # "pipecat-ai>=0.0.60",
+    # "faster-whisper>=1.0.0",
+    # "kokoro>=0.7.0",
+]
+
+[project.optional-dependencies]
+voice = [
+    "pipecat-ai>=0.0.60",
+    "faster-whisper>=1.0.0",
+    "kokoro>=0.7.0",
+]
+
+[project.scripts]
+voxprime = "server:main"
+voxprime-console = "console_agent:main"
+# voxprime-voice = "voice_agent:main"  # Requires voice extras
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["voxprime"]
